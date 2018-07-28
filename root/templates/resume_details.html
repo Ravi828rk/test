@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<div class="col-sm-4 tc">
+        <img class="img img-circle" src="{{ url_for('static', filename='profile_pics/' + current_user.image) }}" height="200px" width="200px">
+        <div class="media-body">
+            <h2 class="account-heading"><span style="font-family: 'Kirang Haerang', cursive;">{{ current_user.username.upper() }}</span></h2>
+            <p class="text-secondary">{{ current_user.email }}</p>
+        </div>
+    </div>
+    <div class="col-sm-8">
+    	<form method="post" enctype="multipart/form-data">
+			{{ form.hidden_tag() }}
+
+			<div class="form-group">
+				{% if form.category.errors %}
+					{{ form.category(class="form-control is-invalid") }}
+					<div class="invalid-feedback">
+						{% for error in form.category.errors %}
+							<span>{{ error }}</span>
+						{% endfor %}
+					</div>
+				{% else %}
+					{{ form.category(class="form-control ci") }}
+				{% endif %}
+			</div>
+			
+
+			<div class="form-group">
+				{{ form.year.label }}
+				{% if form.year.errors %}
+					{{ form.year(class="form-control is-invalid") }}
+					<div class="invalid-feedback">
+						{% for error in form.year.errors %}
+							<span>{{ error }}</span>
+						{% endfor %}
+					</div>
+				{% else %}
+					{{ form.year(class="form-control ci") }}
+				{% endif %}
+			</div>
+
+			<div class="form-group">
+				{{ form.title.label }}
+				{% if form.title.errors %}
+					{{ form.title(class="form-control is-invalid") }}
+					<div class="invalid-feedback">
+						{% for error in form.title.errors %}
+							<span>{{ error }}</span>
+						{% endfor %}
+					</div>
+				{% else %}
+					{{ form.title(class="form-control ci") }}
+				{% endif %}
+			</div>
+
+			<div class="form-group">
+				{{ form.sub_title.label }}
+				{% if form.sub_title.errors %}
+					{{ form.sub_title(class="form-control is-invalid") }}
+					<div class="invalid-feedback">
+						{% for error in form.sub_title.errors %}
+							<span>{{ error }}</span>
+						{% endfor %}
+					</div>
+				{% else %}
+					{{ form.sub_title(class="form-control ci") }}
+				{% endif %}
+			</div>
+
+			<div class="form-group">
+				{{ form.body.label }}
+				{% if form.body.errors %}
+					{{ form.body(class="form-control is-invalid") }}
+					<div class="invalid-feedback">
+						{% for error in form.body.errors %}
+							<span>{{ error }}</span>
+						{% endfor %}
+					</div>
+				{% else %}
+					{{ form.body(class="form-control ci") }}
+				{% endif %}
+			</div>
+
+
+			<div class="form-group">
+				{{ form.submit(class="btn btn-default cb")}}
+			</div>
+		</form>
+
+
+    </div>
+{% endblock %}

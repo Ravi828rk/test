@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	
+	<div class="col-sm-4 tc">
+        <img class="img img-circle" src="{{ image_file }}" height="200px" width="200px">
+        <div class="media-body">
+            <h2 class="account-heading">{{ current_user.username }}</h2>
+            <p class="text-secondary">{{ current_user.email }}</p>
+        </div>
+    </div>
+	<div class="col-sm-8">
+		<form method="post" enctype="multipart/form-data">
+			{{ form.hidden_tag() }}
+
+			<div class="form-group">
+				{{ form.picture.label }}
+                {{ form.picture(class="form-control-file ci") }}
+				{% if form.picture.errors %}
+                    {% for error in form.picture.errors %}
+                     	<span class="text-danger">{{ error }}</span><br>
+                    {% endfor %}
+                {% endif %}
+			</div>
+
+			<div class="form-group">
+				{{ form.submit(class="btn btn-default cb")}}
+				
+			</div>
+		</form>
+	</div>
+	
+{% endblock %}

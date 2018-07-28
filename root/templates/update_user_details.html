@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<div class="col-sm-4 tc">
+        <img class="img img-circle" src="{{ image_file }}" height="200px" width="200px">
+        <div class="media-body">
+            <h2 class="account-heading"><span style="font-family: 'Kirang Haerang', cursive;">{{ current_user.username.upper() }}</span></h2>
+            <p class="text-secondary">{{ current_user.email }}</p>
+        </div>
+    </div>
+    
+	<div class="col-sm-8">
+		<form class="form-inline", method="post">
+			{{ form.hidden_tag() }}
+			<div class="row mt-4">
+
+				<div class="col-sm-6">
+					<div class="form-group wt-100">
+					    <div class="input-group wt-100">
+					    	<span class="input-group-addon cii" style="width: 25%"><i class="fas fa-user-tie"></i></span>
+					      	{% if form.name.errors %}
+								{{ form.name(class="form-control is-invalid") }}
+								<div class="invalid-feedback">
+									{% for error in form.name.errors %}
+										<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+							{% else %}
+								{{ form.name(class="form-control ci") }}
+							{% endif %}
+					    </div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group wt-100">
+					    <div class="input-group wt-100">
+					      	<span class="input-group-addon cii" style="width: 25%"><i class="fas fa-birthday-cake"></i></span>
+					      	{% if form.dob.errors %}
+								{{ form.dob(class="form-control is-invalid") }}
+								<div class="invalid-feedback">
+									{% for error in form.dob.errors %}
+										<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+							{% else %}
+								{{ form.dob(class="form-control ci") }}
+							{% endif %}
+					    </div>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="row mt-4">
+
+				<div class="col-sm-12">
+					<div class="form-group wt-100">
+					    <div class="input-group wt-100">
+					      	<span class="input-group-addon cii" style="width: 12.2%"><i class="far fa-address-card"></i></span>
+					      	{% if form.address.errors %}
+								{{ form.address(class="form-control is-invalid") }}
+								<div class="invalid-feedback">
+									{% for error in form.address.errors %}
+										<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+							{% else %}
+								{{ form.address(class="form-control ci") }}
+							{% endif %}
+					    </div>
+					</div>
+				</div>
+
+			</div>
+
+
+			<div class="row mt-4">
+
+				<div class="col-sm-6">
+					<div class="form-group wt-100">
+					    <div class="input-group wt-100">
+					      	<span class="input-group-addon cii" style="width: 25%"><i class="fas fa-mobile-alt"></i></span>
+					      	{% if form.mobile.errors %}
+								{{ form.mobile(class="form-control is-invalid") }}
+								<div class="invalid-feedback">
+									{% for error in form.mobile.errors %}
+										<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+							{% else %}
+								{{ form.mobile(class="form-control ci") }}
+							{% endif %}
+					    </div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group wt-100">
+					    <div class="input-group wt-100">
+					      	<span class="input-group-addon cii" style="width: 25%"><i class="fas fa-mobile-alt"></i></span>
+					      	{% if form.phone.errors %}
+								{{ form.phone(class="form-control is-invalid") }}
+								<div class="invalid-feedback">
+									{% for error in form.phone.errors %}
+										<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+							{% else %}
+								{{ form.phone(class="form-control ci") }}
+							{% endif %}
+					    </div>
+					</div>
+				</div>
+
+			</div>
+
+
+			<div class="row mt-4">
+
+				<div class="col-sm-12">
+					<div class="form-group wt-100">
+					    <div class="input-group wt-100">
+					      	<span class="input-group-addon cii" style="width: 12.2%"><i class="fas fa-tasks"></i></span>
+					      	{% if form.hobbies.errors %}
+								{{ form.hobbies(class="form-control is-invalid") }}
+								<div class="invalid-feedback">
+									{% for error in form.hobbies.errors %}
+										<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+							{% else %}
+								{{ form.hobbies(class="form-control ci") }}
+							{% endif %}
+					    </div>
+					</div>
+				</div>
+
+			</div>
+
+
+			<div class="row mt-4">
+
+				<div class="col-sm-6">
+					<div class="form-group wt-100">
+					    <div class="input-group wt-100">
+					      	<span class="input-group-addon cii" style="width: 25%"><i class="fas fa-globe-asia"></i></span>
+					      	{% if form.country.errors %}
+								{{ form.country(class="form-control is-invalid") }}
+								<div class="invalid-feedback">
+									{% for error in form.country.errors %}
+										<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+							{% else %}
+								{{ form.country(class="form-control ci") }}
+							{% endif %}
+					    </div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group wt-100">
+					    <div class="input-group wt-100">
+					      	<span class="input-group-addon cii" style="width: 25%"><i class="fas fa-location-arrow"></i></span>
+					      	{% if form.city.errors %}
+								{{ form.city(class="form-control is-invalid") }}
+								<div class="invalid-feedback">
+									{% for error in form.city.errors %}
+										<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+							{% else %}
+								{{ form.city(class="form-control ci") }}
+							{% endif %}
+					    </div>
+					</div>
+				</div>
+
+			</div>
+
+
+			{{ form.submit(class="btn btn-default mt-5 cb")}}
+
+		</form>
+	</div>
+	
+{% endblock %}

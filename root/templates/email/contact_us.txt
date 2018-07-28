@@ -1,0 +1,8 @@
+Hey, Admin! {{ user.username.upper() }}, wants to tell you : 
+
+Subject : {{ subject}}
+Message : {{ body }}
+here is {{ user.username }}'s mail id : 
+{{ user.email }}
+Sincerely,
+The Team Portfolio

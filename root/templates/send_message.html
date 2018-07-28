@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<div class="col-sm-8">
+		<form method="post">
+			{{ form.hidden_tag() }}
+
+			<h1><span style="font-family: 'Kirang Haerang', cursive;">Send Message to </span> "{{ recipient}}"</h1>
+
+			<div class="form-group">
+				{{ form.message.label }}
+				{% if form.message.errors %}
+					{{ form.message(class="form-control is-invalid") }}
+					<div class="invalid-feedback">
+						{% for error in form.message.errors %}
+							<span>{{ error }}</span>
+						{% endfor %}
+					</div>
+				{% else %}
+					{{ form.message(class="form-control ci") }}
+				{% endif %}
+			</div>
+
+			<div class="form-group">
+				{{ form.submit(class="btn btn-default cb")}}
+				
+			</div>
+		</form>
+	</div>
+	
+{% endblock %}

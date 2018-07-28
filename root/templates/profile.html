@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<div class="col-sm-4 tc">
+        <img class="img img-circle" src="{{ image_file }}" height="200px" width="200px">
+        <div class="media-body">
+            <h2 class="account-heading"><span style="font-family: 'Kirang Haerang', cursive;">{{ user.username.upper() }}</span></h2>
+            <p class="text-secondary">{{ user.email }}</p>
+            {% if user.username != current_user.username %}
+				<a href="{{ url_for('send_message', recipient=user.username) }}" class="btn btn-default cb"><span style="font-family: 'Kirang Haerang', cursive;">{{'Send message'.upper()}}</span></a>
+			{% endif %}
+        </div>
+    </div>
+    
+	<div class="col-sm-6">
+		<div class="table-responsive">          
+			<table class="table">
+			    <tbody>
+			      	<tr>
+			        	<td>Unique Id </td> <td>: </td> <td>{{user.username}}</td>
+			      	</tr>
+			      	<tr>
+			        	<td>Name </td> <td>: </td> <td>{{user.name}}</td>
+			      	</tr>
+			      	<tr>
+			        	<td>Email </td> <td>: </td> <td>{{user.email}}</td>
+			      	</tr>
+			      	<tr>
+			        	<td>DOB </td> <td>: </td> <td>{{user.dob}}</td>
+			      	</tr>
+			      	<tr>
+			        	<td>Mobile </td> <td>: </td> <td>{{user.mobile}}</td>
+			      	</tr>
+			      	<tr>
+			        	<td>Mobile 2 </td> <td>: </td> <td>{{user.phone}}</td>
+			      	</tr>
+			      	<tr>
+			        	<td>Address </td> <td>: </td> <td>{{user.address}}</td>
+			      	</tr>
+			      	<tr>
+			        	<td>Country </td> <td>: </td> <td>{{user.country}}</td>
+			      	</tr>
+			      	<tr>
+			        	<td>City </td> <td>: </td> <td>{{user.city}}</td>
+			      	</tr>
+			      	<tr>
+			        	<td>Hobbies </td> <td>: </td> <td>{{user.hobbies}}</td>
+			      	</tr>
+			      	<tr>
+			        	<td colspan="3"><a href="{{ url_for('static', filename='resume/' + user.resume) }}" class="btn btn-default cb">Click here to see Resume</a></td>
+			      	</tr>
+			      	{% if user.username == current_user.username %}
+			      	<tr>
+			        	<td colspan="3"><a href="{{ url_for('update_user_details') }}" class="btn btn-default cb">Edit Profile</a></td>
+			      	</tr>
+			      	{% endif %}
+
+			      	
+			      	{% if r %}
+			      	
+			      		{% if edu[0] %}
+			      		<tr><td colspan="3"></td></tr>
+			      		<tr>
+				      		<td colspan="3" style="text-align: center;"><b>EDUCATION</b></td>
+				      	</tr>
+			      		{% for i in r %}
+			      			{% if i.category == 'EDUCATION' %}
+				      			
+				      			<tr>
+				        			<td>{{ i.year }}</td> <td>: </td> <td><b>{{ i.title }}</b></td>
+				      			</tr>
+				      			<tr>
+				        			<td></td> <td> </td> <td>{{ i.sub_title }}</td>
+				      			</tr>
+				      			<tr>
+				      				<td></td> <td> </td> <td>{{ i.body }}</td>
+				      			</tr>
+				      		{% endif %}
+			      		{% endfor %}
+			      		{% endif %}
+			      		
+
+			      		{% if pe[0] %}
+			      		<tr><td colspan="3"></td></tr>
+			      		<tr>
+				      		<td colspan="3" style="text-align: center;"><b>PROFESSIONAL EXPERIENCE</b></td>
+				      	</tr>
+			      		{% for i in r %}
+			      			{% if i.category == 'PROFESSIONAL EXPERIENCE' %}
+				   
+				      			<tr>
+				        			<td>{{ i.year }}</td> <td>: </td> <td><b>{{ i.title }}</b></td>
+				      			</tr>
+				      			<tr>
+				        			<td></td> <td> </td> <td>{{ i.sub_title }}</td>
+				      			</tr>
+				      			<tr>
+				      				<td></td> <td> </td> <td>{{ i.body }}</td>
+				      			</tr>
+				      		{% endif %}
+			      		{% endfor %}
+			      		{% endif %}
+			      		
+
+			      		{% if pw[0] %}
+			      		<tr><td colspan="3"></td></tr>
+			      		<tr>
+				      		<td colspan="3" style="text-align: center;"><b>PROJECT WORK</b></td>
+				      	</tr>
+			      		{% for i in r %}
+			      			{% if i.category == 'PROJECT WORK' %}
+				      			<tr>
+				        			<td>{{ i.year }}</td> <td>: </td> <td><b>{{ i.title }}</b></td>
+				      			</tr>
+				      			<tr>
+				        			<td></td> <td> </td> <td>{{ i.sub_title }}</td>
+				      			</tr>
+				      			<tr>
+				      				<td></td> <td> </td> <td>{{ i.body }}</td>
+				      			</tr>
+				      		{% endif %}
+			      		{% endfor %}
+			      		{% endif %}
+			      		
+
+			      		{% if ea[0] %}
+			      		<tr><td colspan="3"></td></tr>
+			      		<tr>
+				      		<td colspan="3" style="text-align: center;"><b>EXTRACURRICULAR ACTIVITY</b></td>
+				      	</tr>
+			      		{% for i in r %}
+			      			{% if i.category == 'EXTRACURRICULAR ACTIVITY' %}
+				      			<tr>
+				        			<td>{{ i.year }}</td> <td>: </td> <td><b>{{ i.title }}</b></td>
+				      			</tr>
+				      			<tr>
+				        			<td></td> <td> </td> <td>{{ i.sub_title }}</td>
+				      			</tr>
+				      			<tr>
+				      				<td></td> <td> </td> <td>{{ i.body }}</td>
+				      			</tr>
+				      		{% endif %}
+			      		{% endfor %}
+			      		{% endif %}
+			      		<br>
+
+			      	{% endif %}
+			      	
+
+			    </tbody>
+
+			</table>
+
+		</div>
+	</div>
+	
+{% endblock %}

@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-	<div class="col-sm-4 tc">
+<div class="wrapper">
+	<div class="col-sm-4 tc sidebar">
         <img class="img img-circle" src="{{ image_file }}" height="200px" width="200px">
         <div class="media-body">
             <h2 class="account-heading"><span style="font-family: 'Kirang Haerang', cursive;">{{ user.username.upper() }}</span></h2>
@@ -9,10 +10,14 @@
             {% if user.username != current_user.username %}
 				<a href="{{ url_for('send_message', recipient=user.username) }}" class="btn btn-default cb"><span style="font-family: 'Kirang Haerang', cursive;">{{'Send message'.upper()}}</span></a>
 			{% endif %}
+			<a href="{{ url_for('static', filename='resume/' + user.resume) }}" class="btn btn-default cb mt-5">Click here to see Resume</a><br>
+			{% if user.username == current_user.username %}
+				<a href="{{ url_for('update_user_details') }}" class="btn btn-default cb mt-5"> <i class="far fa-edit"></i> Profile</a>
+			{% endif %}
         </div>
     </div>
     
-	<div class="col-sm-6">
+	<div class="col-sm-6 main">
 		<div class="table-responsive">          
 			<table class="table">
 			    <tbody>
@@ -46,14 +51,6 @@
 			      	<tr>
 			        	<td>Hobbies </td> <td>: </td> <td>{{user.hobbies}}</td>
 			      	</tr>
-			      	<tr>
-			        	<td colspan="3"><a href="{{ url_for('static', filename='resume/' + user.resume) }}" class="btn btn-default cb">Click here to see Resume</a></td>
-			      	</tr>
-			      	{% if user.username == current_user.username %}
-			      	<tr>
-			        	<td colspan="3"><a href="{{ url_for('update_user_details') }}" class="btn btn-default cb">Edit Profile</a></td>
-			      	</tr>
-			      	{% endif %}
 
 			      	
 			      	{% if r %}
@@ -75,6 +72,11 @@
 				      			<tr>
 				      				<td></td> <td> </td> <td>{{ i.body }}</td>
 				      			</tr>
+				      			{% if i.resume_details.username == current_user.username %}
+						      	<tr>
+						        	<td colspan="3"><a href="{{ url_for('update_resume_details', id=i.id) }}" class="btn btn-default cb la"><i class="far fa-edit"></i></a> | <a href="{{ url_for('delete_resume_details', id=i.id) }}" class="btn btn-default cb la"><i class="far fa-trash-alt"></i></a></td>
+						      	</tr>
+						      	{% endif %}
 				      		{% endif %}
 			      		{% endfor %}
 			      		{% endif %}
@@ -97,6 +99,11 @@
 				      			<tr>
 				      				<td></td> <td> </td> <td>{{ i.body }}</td>
 				      			</tr>
+				      			{% if i.resume_details.username == current_user.username %}
+						      	<tr>
+						        	<td colspan="3"><a href="{{ url_for('update_resume_details', id=i.id) }}" class="btn btn-default cb la"><i class="far fa-edit"></i></a> | <a href="{{ url_for('delete_resume_details', id=i.id) }}" class="btn btn-default cb la"><i class="far fa-trash-alt"></i></a></td>
+						      	</tr>
+						      	{% endif %}
 				      		{% endif %}
 			      		{% endfor %}
 			      		{% endif %}
@@ -118,6 +125,11 @@
 				      			<tr>
 				      				<td></td> <td> </td> <td>{{ i.body }}</td>
 				      			</tr>
+				      			{% if i.resume_details.username == current_user.username %}
+						      	<tr>
+						        	<td colspan="3"><a href="{{ url_for('update_resume_details', id=i.id) }}" class="btn btn-default cb la"><i class="far fa-edit"></i></a> | <a href="{{ url_for('delete_resume_details', id=i.id) }}" class="btn btn-default cb la"><i class="far fa-trash-alt"></i></a></td>
+						      	</tr>
+						      	{% endif %}
 				      		{% endif %}
 			      		{% endfor %}
 			      		{% endif %}
@@ -139,6 +151,11 @@
 				      			<tr>
 				      				<td></td> <td> </td> <td>{{ i.body }}</td>
 				      			</tr>
+				      			{% if i.resume_details.username == current_user.username %}
+						      	<tr>
+						        	<td colspan="3"><a href="{{ url_for('update_resume_details', id=i.id) }}" class="btn btn-default cb la"><i class="far fa-edit"></i></a> | <a href="{{ url_for('delete_resume_details', id=i.id) }}" class="btn btn-default cb la"><i class="far fa-trash-alt"></i></a></td>
+						      	</tr>
+						      	{% endif %}
 				      		{% endif %}
 			      		{% endfor %}
 			      		{% endif %}
@@ -153,5 +170,6 @@
 
 		</div>
 	</div>
+</div>
 	
 {% endblock %}

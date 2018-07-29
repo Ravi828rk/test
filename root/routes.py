@@ -21,11 +21,6 @@ def home():
     pe = current_user.resume_details.filter_by(category='PROFESSIONAL EXPERIENCE')
     pw = current_user.resume_details.filter_by(category='PROJECT WORK')
     ea = current_user.resume_details.filter_by(category='EXTRACURRICULAR ACTIVITY')
-    print(r)
-    print(edu)
-    print(pe)
-    print(pw)
-    print(ea)
     image = url_for('static', filename='profile_pics/' + current_user.image)
     return render_template('profile.html', title='Home', user=current_user,
                            image_file=image, r=r, edu=edu, pe=pe, pw=pw, ea=ea)
@@ -273,9 +268,9 @@ def contact_us():
     return render_template('contact_us.html', form=form, title='Contact Us')
 
 
-@app.route('/education', methods=['POST', 'GET'])
+@app.route('/resume_details', methods=['POST', 'GET'])
 @login_required
-def education():
+def resume_details():
     form = ResumeDetails()
     # category = request.form.get('category')
     print(form.category.data)
@@ -285,6 +280,44 @@ def education():
         db.session.add(details)
         db.session.commit()
         flash('Your details saved', 'success')
-        return redirect(url_for('education'))
+        return redirect(url_for('resume_details'))
 
     return render_template('resume_details.html', form=form, title='Resume Details')
+
+
+@app.route('/update_resume_details/<id>', methods=['POST', 'GET'])
+@login_required
+def update_resume_details(id):
+    form = ResumeDetails()
+    resume_detail = Resume.query.filter_by(id=id).first_or_404()
+    print(resume_detail.resume_details.username)
+    if resume_detail.resume_details.username != current_user.username:
+        abort(403)
+    if form.validate_on_submit():
+        resume_detail.category = form.category.data
+        resume_detail.year = form.year.data
+        resume_detail.title = form.title.data
+        resume_detail.sub_title = form.sub_title.data
+        resume_detail.body = form.body.data
+        db.session.commit()
+        flash('Details Updated Successfully!', 'success')
+    if request.method == 'GET':
+        form.category.data = resume_detail.category
+        form.title.data = resume_detail.title
+        form.sub_title.data = resume_detail.sub_title
+        form.body.data = resume_detail.body
+        form.year.data = resume_detail.year
+    return render_template('resume_details.html', form=form, tilte='Update details')
+
+
+@app.route('/resume_details/delete/<id>', methods=['POST', 'GET'])
+@login_required
+def delete_resume_details(id):
+    resume_detail = Resume.query.filter_by(id=id).first_or_404()
+    if resume_detail.resume_details.username != current_user.username:
+        abort(403)
+    db.session.delete(resume_detail)
+    db.session.commit()
+    flash('Details deleted successfully!', 'success')
+    return redirect(url_for('home'))
+

@@ -16,6 +16,39 @@ body{
 	border-color: #000;
 	color: #000;
 }
+.la{
+	text-align: right;
+}
+@media screen and (min-width: 720px){
+	div.wrapper {
+	  display: flex;
+	  justify-content: space-between;
+	}
+
+	div.main,
+	div.sidebar {
+	  
+	  padding: 15px;
+	  background-color: #fff;
+	}
+
+	.main {
+		border:1px solid #000;
+	  width: 65%;
+	  height: auto;
+	}
+
+	.sidebar {
+
+	  width: 25%;
+	  height: 25vh;
+	}
+	div.sidebar {
+	  position: -webkit-sticky;
+	  position: sticky;
+	  top: 100px;
+	}
+}
 .mt-1{
 	margin-top: 1px;
 }

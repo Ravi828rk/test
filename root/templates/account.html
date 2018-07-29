@@ -51,11 +51,15 @@
 			</div>
 
 			<div class="form-group">
-				{{ form.submit(class="btn btn-default cb")}}
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<a href="{{ url_for('update_user_details') }}" class="btn btn-default cb"> Update Personal Details?</a>
-				&nbsp;
-				<a href="{{ url_for('upload_resume') }}" class="btn btn-default cb"> Update Resume?</a>
+				{{ form.submit(class="btn btn-default cb mt-5")}}
+				 <br>
+				
+				<a href="{{ url_for('upload_resume') }}" class="btn btn-default cb mt-5"> Update Resume?</a>
+				 <br>
+				<a href="{{ url_for('resume_details') }}" class="btn btn-default cb mt-5"> Add Resume Fields?</a>
+				<br>
+				<a href="{{ url_for('update_user_details') }}" class="btn btn-default cb mt-5"> Update Personal Details?</a>
+				
 			</div>
 		</form>
 
